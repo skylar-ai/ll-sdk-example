@@ -67,7 +67,8 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
               {subtitle.time.toLocaleDateString()}
               {subtitle.texts.map((text) => (
                 <div key={text.language}>
-                  {icons[text.language]} {text.text}
+                  {icons[subtitle.sourceLanguage!]} {"->"}{" "}
+                  {icons[text.language]} {subtitle.speakerId}:{text.text}
                 </div>
               ))}
             </p>

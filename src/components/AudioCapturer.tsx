@@ -10,6 +10,7 @@ import MicrophoneSelector from "./MicrophoneSelect";
 const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
   const [stream, setStream] = useState<MediaStream>();
   const [status, setStatus] = useState<TranscriptorStatus>("stopped");
+  const [speakerId, setSpeakerId] = useState<string>();
   const [error, setError] = useState<string>();
   const [language, setLanguage] = useState<Language | undefined>();
 
@@ -22,7 +23,7 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
       setStatus("starting");
       transcriptor.current = await createTranscriptor({
         eventToken,
-        speakerId: "renato",
+        speakerId,
         sourceLanguage: "pt-BR",
         targetLanguages: language,
         onStatusChange: setStatus,
@@ -51,6 +52,16 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
       <h2 className="is-size-2 mb-4 mt-6">Microphone Stream</h2>
       {status && <p>Status: {status}</p>}
       {error && <p>{error}</p>}
+      <div className="mt-3 mb-2">
+        <label className="label">Speaker ID</label>
+        <input
+          className="input"
+          style={{ maxWidth: "30rem" }}
+          type="text"
+          value={speakerId}
+          onChange={(e) => setSpeakerId(e.target.value)}
+        />
+      </div>
       <div className="select">
         <MicrophoneSelector setStream={setStream} />
       </div>
