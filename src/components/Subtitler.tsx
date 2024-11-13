@@ -22,16 +22,13 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
   async function startSubtitling() {
     if (!eventToken) return;
 
-    if (!subtitleListener.current) {
-      subtitleListener.current = await createSubtitleListener({
-        eventToken,
-        onSubtitle: (subtitle) =>
-          setSubtitles((prev) => [...(prev || []), subtitle]),
-        onStatusChange: setStatus,
-        onError: (e) => setError(e.message),
-      });
-      return;
-    }
+    subtitleListener.current = await createSubtitleListener({
+      eventToken,
+      onSubtitle: (subtitle) =>
+        setSubtitles((prev) => [...(prev || []), subtitle]),
+      onStatusChange: setStatus,
+      onError: (e) => setError(e.message),
+    });
 
     subtitleListener.current.start();
   }

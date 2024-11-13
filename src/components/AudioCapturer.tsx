@@ -19,19 +19,17 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
   async function startRecording() {
     if (!stream) return;
 
-    if (!transcriptor.current) {
-      setStatus("starting");
-      transcriptor.current = await createTranscriptor({
-        eventToken,
-        speakerId,
-        sourceLanguage: "pt-BR",
-        targetLanguages: language,
-        onStatusChange: setStatus,
-        onError: (e) => setError(e.message),
-      });
-    }
+    setStatus("starting");
+    transcriptor.current = await createTranscriptor({
+      eventToken,
+      speakerId,
+      sourceLanguage: "pt-BR",
+      targetLanguages: language,
+      onStatusChange: setStatus,
+      onError: (e) => setError(e.message),
+    });
 
-    transcriptor.current?.start({ stream });
+    transcriptor.current.start({ stream });
   }
 
   function stopRecording() {
