@@ -29,8 +29,6 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
       onStatusChange: setStatus,
       onError: (e) => setError(e.message),
     });
-
-    subtitleListener.current.start();
   }
 
   function stopSubtitling() {
