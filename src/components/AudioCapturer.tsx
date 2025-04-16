@@ -12,6 +12,7 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
   const [status, setStatus] = useState<TranscriptorStatus>("stopped");
   const [speakerId, setSpeakerId] = useState<string>();
   const [error, setError] = useState<string>();
+  const [muted, setMuted] = useState(false);
   const [subtitleLanguage, setSubtitleLanguage] = useState<
     Language | undefined
   >();
@@ -64,6 +65,11 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
     setSourceLanguage(language);
   }
 
+  function toggleMute() {
+    setMuted(!muted);
+    transcriptor.current?.setMute(muted);
+  }
+
   return (
     <div>
       <h2 className="is-size-2 mb-4 mt-6">Microphone Stream</h2>
@@ -78,6 +84,12 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
           value={speakerId}
           onChange={(e) => setSpeakerId(e.target.value)}
         />
+      </div>
+      <div className="mt-3 mb-2">
+        <label className="checkbox">
+          <input type="checkbox" checked={muted} onChange={toggleMute} />
+          &nbsp; Mute
+        </label>
       </div>
       <div className="select">
         <MicrophoneSelector setStream={setStream} />

@@ -7,7 +7,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@skylar-ai/ll-sdk": "^0.2.3",
+    "@skylar-ai/ll-sdk": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -23,5 +23,6 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "packageManager": "pnpm@9.15.4+sha256.9bee59c7313a216722c079c1e22160dea7f88df4e0c3450b1d7b01b882336c6a"
 }
