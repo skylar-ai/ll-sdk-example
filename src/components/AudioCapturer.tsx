@@ -12,7 +12,11 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
   const [status, setStatus] = useState<TranscriptorStatus>("stopped");
   const [speakerId, setSpeakerId] = useState<string>();
   const [error, setError] = useState<string>();
-  const [language, setLanguage] = useState<Language | undefined>();
+  const [subtitleLanguage, setSubtitleLanguage] = useState<
+    Language | undefined
+  >();
+
+  const [sourceLanguage, setSourceLanguage] = useState<Language | undefined>();
 
   const transcriptor = useRef<TranscriptorInstance>();
 
@@ -23,8 +27,8 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
     transcriptor.current = await createTranscriptor({
       eventToken,
       speakerId,
-      sourceLanguage: "pt-BR",
-      targetLanguages: language,
+      sourceLanguage: sourceLanguage,
+      targetLanguages: subtitleLanguage,
       onStatusChange: setStatus,
       onError: (e) => setError(e.message),
     });
@@ -36,13 +40,28 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
     transcriptor.current?.stop();
   }
 
-  function changeLanguage(language: Language) {
+  function changeSubtitleLanguage(language: Language) {
+    console.log("changing subtitle language", language);
+    console.log("source language", sourceLanguage);
+
     transcriptor.current?.updateLanguages({
-      sourceLanguage: "pt-BR",
+      sourceLanguage: sourceLanguage || "pt-BR",
       targetLanguages: language,
     });
 
-    setLanguage(language);
+    setSubtitleLanguage(language);
+  }
+
+  function changeSourceLanguage(language: Language) {
+    console.log("changing source language", language);
+    console.log("subtitle language", subtitleLanguage);
+
+    transcriptor.current?.updateLanguages({
+      sourceLanguage: language,
+      targetLanguages: subtitleLanguage || [],
+    });
+
+    setSourceLanguage(language);
   }
 
   return (
@@ -85,25 +104,50 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
       <div className="mt-4">
         Se um idioma não for selecionado, o valor inicial do evento é usado.
       </div>
+      <div className="is-size-4 mb-1 mt-2">Linguagem de Origem</div>
       <div className="buttons has-addons is-centered">
         <button
           className="button is-link"
-          disabled={language == "pt-BR"}
-          onClick={() => changeLanguage("pt-BR")}
+          disabled={sourceLanguage == "pt-BR"}
+          onClick={() => changeSourceLanguage("pt-BR")}
         >
           Português
         </button>
         <button
           className="button is-link"
-          disabled={language == "es-ES"}
-          onClick={() => changeLanguage("es-ES")}
+          disabled={sourceLanguage == "es-ES"}
+          onClick={() => changeSourceLanguage("es-ES")}
         >
           Espanhol
         </button>
         <button
           className="button is-link"
-          disabled={language == "en-US"}
-          onClick={() => changeLanguage("en-US")}
+          disabled={sourceLanguage == "en-US"}
+          onClick={() => changeSourceLanguage("en-US")}
+        >
+          Inglês
+        </button>
+      </div>
+      <div className="is-size-4 mb-1 mt-2">Linguagem das Legendas</div>
+      <div className="buttons has-addons is-centered">
+        <button
+          className="button is-link"
+          disabled={subtitleLanguage == "pt-BR"}
+          onClick={() => changeSubtitleLanguage("pt-BR")}
+        >
+          Português
+        </button>
+        <button
+          className="button is-link"
+          disabled={subtitleLanguage == "es-ES"}
+          onClick={() => changeSubtitleLanguage("es-ES")}
+        >
+          Espanhol
+        </button>
+        <button
+          className="button is-link"
+          disabled={subtitleLanguage == "en-US"}
+          onClick={() => changeSubtitleLanguage("en-US")}
         >
           Inglês
         </button>

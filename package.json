@@ -7,7 +7,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@skylar-ai/ll-sdk": "^0.2.0",
+    "@skylar-ai/ll-sdk": "^0.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

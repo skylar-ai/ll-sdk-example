@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@skylar-ai/ll-sdk':
-        specifier: ^0.2.0
-        version: 0.2.2
+        specifier: ^0.2.3
+        version: 0.2.3
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -671,8 +671,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@skylar-ai/ll-sdk@0.2.2':
-    resolution: {integrity: sha512-rJqN9BwEIdqIrUscG0ep9pdLG7lQKS1WxsJdCJrY7DQZ3EvWbMxH3L4BtefENZMi0HAlUnu/6dExAt7Ag20e+Q==, tarball: https://npm.pkg.github.com/download/@skylar-ai/ll-sdk/0.2.2/dae5f1ecd47e9b02c316415d02915475d1e9d541}
+  '@skylar-ai/ll-sdk@0.2.3':
+    resolution: {integrity: sha512-3Sql7Nf88/X/GDKfE4Q52wrwnj/BXCarIvij07UFTWR+y4YskvEMDm3x9ny+mipjccN78vS2hcxt2NRrXjgsEw==, tarball: https://npm.pkg.github.com/download/@skylar-ai/ll-sdk/0.2.3/38aea974b42ef0e0c423ed194a049352a42cec15}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -2081,7 +2081,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.24.0':
     optional: true
 
-  '@skylar-ai/ll-sdk@0.2.2':
+  '@skylar-ai/ll-sdk@0.2.3':
     dependencies:
       firebase: 10.13.2
     transitivePeerDependencies:

@@ -24,8 +24,18 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
 
     subtitleListener.current = await createSubtitleListener({
       eventToken,
-      onSubtitle: (subtitle) =>
-        setSubtitles((prev) => [...(prev || []), subtitle]),
+      onSubtitle: (subtitle) => {
+        fetch("http://localhost:8080", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: subtitle.texts[0].text,
+          }),
+        });
+        setSubtitles((prev) => [...(prev || []), subtitle]);
+      },
       onStatusChange: setStatus,
       onError: (e) => setError(e.message),
     });
@@ -58,7 +68,7 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
       >
         {subtitles?.map((subtitle, index) => (
           <div key={index}>
-            <p className="mt-4">
+            <div className="mt-4">
               {subtitle.time.toLocaleDateString()}
               {subtitle.texts.map((text) => (
                 <div key={text.language}>
@@ -66,7 +76,7 @@ export default function Subtitler({ eventToken }: { eventToken: string }) {
                   {icons[text.language]} {subtitle.speakerId}:{text.text}
                 </div>
               ))}
-            </p>
+            </div>
           </div>
         ))}
       </div>

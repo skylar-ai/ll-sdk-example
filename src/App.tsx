@@ -1,9 +1,13 @@
-import { testMessage } from "@skylar-ai/ll-sdk";
+import { testMessage, setSDKConfig } from "@skylar-ai/ll-sdk";
 import AudioCapturer from "./components/AudioCapturer";
 import Subtitler from "./components/Subtitler";
 import EventTokenInput from "./components/EventTokenInput";
 import { useState } from "react";
 
+setSDKConfig({
+  env: "prod",
+  logLevel: "debug",
+});
 function App() {
   const [eventToken, setEventToken] = useState("");
 
