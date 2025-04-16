@@ -86,10 +86,9 @@ const AudioCapturer = ({ eventToken }: { eventToken: string }) => {
         />
       </div>
       <div className="mt-3 mb-2">
-        <label className="checkbox">
-          <input type="checkbox" checked={muted} onChange={toggleMute} />
-          &nbsp; Mute
-        </label>
+        <button onClick={toggleMute} className="button is-link">
+          {muted ? "Unmute" : "Mute"}
+        </button>
       </div>
       <div className="select">
         <MicrophoneSelector setStream={setStream} />
